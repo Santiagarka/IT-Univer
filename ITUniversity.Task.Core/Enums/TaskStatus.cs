@@ -12,6 +12,10 @@
         /// <summary>
         /// Выполненая
         /// </summary>
-        Done = 1
+        Done = 1,
+        /// <summary>
+        /// В работе
+        /// </summary>
+        ToDo = 2
     }
 }

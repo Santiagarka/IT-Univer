@@ -16,9 +16,19 @@ namespace ITUniversity.Task.Core.Stores
             this.tasks = new List<TaskBase>();
         }
 
+        /// <summary>
+        /// Сохрание
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
         public TaskBase Save(TaskBase task)
         {
-            var savedTask = tasks.FirstOrDefault(item => item.Id == task.Id);
+            if (task == null)
+            {
+                throw new Exception("Task cannot be empty");
+            }
+
+            var savedTask = tasks.FirstOrDefault(item => item == task);
             if(savedTask != null)
             {
                 return savedTask;
@@ -30,15 +40,30 @@ namespace ITUniversity.Task.Core.Stores
             return task;
         }
 
+        /// <summary>
+        /// Получить задачу по Id
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
         public TaskBase Get(long taskId)
         {
             var task = tasks.FirstOrDefault(item => item.Id == taskId);
             return task;
         }
 
+        /// <summary>
+        /// Обновить задачу
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
         public TaskBase Update(TaskBase task)
         {
-            var updatedTask = tasks.FirstOrDefault(item => item.Id == task.Id);
+            if(task == null)
+            {
+                throw new Exception("Task cannot be empty");
+            }
+
+            var updatedTask = tasks.FirstOrDefault(item => item == task);
             if(updatedTask != null)
             {
                 updatedTask.Subject = task.Subject;
@@ -53,6 +78,10 @@ namespace ITUniversity.Task.Core.Stores
             }
         }
 
+        /// <summary>
+        /// Удалить задачу по Id
+        /// </summary>
+        /// <param name="taskId"></param>
         public void Delete(long taskId)
         {
             var deletedTask = tasks.FirstOrDefault(item => item.Id == taskId);
