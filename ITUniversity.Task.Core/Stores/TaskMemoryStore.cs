@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using ITUniversity.Task.Core.Entities;
+using ITUniversity.Task.Core.Helpers;
 
 namespace ITUniversity.Task.Core.Stores
 {
@@ -28,7 +29,7 @@ namespace ITUniversity.Task.Core.Stores
                 throw new Exception("Task cannot be empty");
             }
 
-            var savedTask = tasks.FirstOrDefault(item => item == task);
+            var savedTask = tasks.FirstOrDefault(item => TaskHelpers.Equals(item,task));
             if(savedTask != null)
             {
                 return savedTask;
@@ -63,7 +64,7 @@ namespace ITUniversity.Task.Core.Stores
                 throw new Exception("Task cannot be empty");
             }
 
-            var updatedTask = tasks.FirstOrDefault(item => item == task);
+            var updatedTask = tasks.FirstOrDefault(item => TaskHelpers.Equals(item, task));
             if(updatedTask != null)
             {
                 updatedTask.Subject = task.Subject;
