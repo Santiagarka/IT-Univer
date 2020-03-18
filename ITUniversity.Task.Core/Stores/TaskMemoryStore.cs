@@ -2,94 +2,78 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using ITUniversity.Task.Core.Entities;
-using ITUniversity.Task.Core.Helpers;
+using ITUniversity.Task.Entities;
+using ITUniversity.Task.Helpers;
 
-namespace ITUniversity.Task.Core.Stores
+namespace ITUniversity.Task.Stores
 {
     public class TaskMemoryStore : ITaskStore
     {
         private List<TaskBase> tasks;
+
         private long counter;
 
+        /// <summary>
+        /// Инициализировать экземпляр <see cref="TaskMemoryStore"/>
+        /// </summary>
         public TaskMemoryStore()
         {
-            this.tasks = new List<TaskBase>();
+            counter = 1;
+            tasks = new List<TaskBase>();
         }
 
-        /// <summary>
-        /// Сохрание
-        /// </summary>
-        /// <param name="task"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public TaskBase Save(TaskBase task)
         {
-            if (task == null)
+            var saved = tasks.FirstOrDefault(item => item.CustomEquals(task));
+            if (saved != null)
             {
-                throw new Exception("Task cannot be empty");
+                task.Id = saved.Id;
+                return saved.Copy();
             }
-
-            var savedTask = tasks.FirstOrDefault(item => TaskHelpers.Equals(item,task));
-            if(savedTask != null)
-            {
-                return savedTask;
-            }
-
             task.Id = counter++;
-            task.CreationDate = DateTime.Now;
-            tasks.Add(task);
+            tasks.Add(task.Copy());
             return task;
         }
 
-        /// <summary>
-        /// Получить задачу по Id
-        /// </summary>
-        /// <param name="taskId"></param>
-        /// <returns></returns>
-        public TaskBase Get(long taskId)
-        {
-            var task = tasks.FirstOrDefault(item => item.Id == taskId);
-            return task;
-        }
-
-        /// <summary>
-        /// Обновить задачу
-        /// </summary>
-        /// <param name="task"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public TaskBase Update(TaskBase task)
         {
-            if(task == null)
+            var saved = InternalGet(task.Id);
+            if (saved == null)
             {
-                throw new Exception("Task cannot be empty");
+                throw new Exception("Задача не найдена");
             }
+            saved.Subject = task.Subject;
+            saved.Description = task.Description;
+            saved.CreationDate = task.CreationDate;
+            saved.Status = task.Status;
 
-            var updatedTask = tasks.FirstOrDefault(item => TaskHelpers.Equals(item, task));
-            if(updatedTask != null)
-            {
-                updatedTask.Subject = task.Subject;
-                updatedTask.Description = task.Description;
-                updatedTask.CreationDate = task.CreationDate;
-                updatedTask.Status = task.Status;
-                return updatedTask;
-            }
-            else
-            {
-                return task;
-            }
+            return task;
         }
 
-        /// <summary>
-        /// Удалить задачу по Id
-        /// </summary>
-        /// <param name="taskId"></param>
-        public void Delete(long taskId)
+        /// <inheritdoc/>
+        public TaskBase Get(long id)
         {
-            var deletedTask = tasks.FirstOrDefault(item => item.Id == taskId);
-            if(deletedTask != null)
-            {
-                tasks.Remove(deletedTask);
-            }
+            var saved = InternalGet(id);
+            return saved?.Copy();
+        }
+
+        /// <inheritdoc/>
+        public ICollection<TaskBase> GetAll()
+        {
+            return tasks.Select(task => task.Copy()).ToList();
+        }
+
+        /// <inheritdoc/>
+        public void Delete(long id)
+        {
+            tasks.RemoveAll(task => task.Id == id);
+        }
+
+        private TaskBase InternalGet(long id)
+        {
+            return tasks.FirstOrDefault(task => task.Id == id);
         }
     }
 }

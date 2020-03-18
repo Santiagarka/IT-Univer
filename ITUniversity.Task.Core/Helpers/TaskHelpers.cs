@@ -1,9 +1,9 @@
-﻿using ITUniversity.Task.Core.Entities;
+﻿using ITUniversity.Task.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ITUniversity.Task.Core.Helpers
+namespace ITUniversity.Task.Helpers
 {
     public static class TaskHelpers
     {
@@ -18,6 +18,25 @@ namespace ITUniversity.Task.Core.Helpers
             {
                 return false;
             }
+        }
+        public static TaskBase Copy(this TaskBase task)
+        {
+            return new TaskBase()
+            {
+                Id = task.Id,
+                Subject = task.Subject,
+                Description = task.Description,
+                CreationDate = task.CreationDate,
+                Status = task.Status
+            };
+        }
+
+        public static bool CustomEquals(this TaskBase thisTask, TaskBase otherTask)
+        {
+            return thisTask.Subject == otherTask.Subject
+                && thisTask.Description == otherTask.Description
+                && thisTask.CreationDate == otherTask.CreationDate
+                && thisTask.Status == otherTask.Status;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ITUniversity.Task.Core.Enums
+﻿namespace ITUniversity.Task.Enums
 {
     /// <summary>
     /// Статус Задачи

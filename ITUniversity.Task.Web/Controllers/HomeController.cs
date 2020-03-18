@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ITUniversity.Task.Web.Models;
-using ITUniversity.Task.Core.Stores;
-using ITUniversity.Task.Core.Entities;
+using ITUniversity.Task.Stores;
+using ITUniversity.Task.Entities;
 
 namespace ITUniversity.Task.Web.Controllers
 {

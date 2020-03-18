@@ -1,8 +1,8 @@
 ﻿using System;
 
-using ITUniversity.Task.Core.Enums;
+using ITUniversity.Task.Enums;
 
-namespace ITUniversity.Task.Core.Entities
+namespace ITUniversity.Task.Entities
 {
 
     public class TaskBase

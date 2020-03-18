@@ -1,18 +1,37 @@
-﻿
-using ITUniversity.Task.Core.Entities;
+﻿using System.Collections.Generic;
+using ITUniversity.Task.Entities;
+using ITUniversity.Task.Managers;
+using ITUniversity.Task.Stores;
 
-namespace ITUniversity.Task.Core.Managers
+namespace ITUniversity.Tasks.Managers
 {
-    public class TaskManager: ITaskManager
+    /// <inheritdoc/>
+    public class TaskManager : ITaskManager
     {
-        public TaskBase Create(TaskBase task)
+        private readonly ITaskStore taskStore;
+
+        public TaskManager(ITaskStore taskStore)
         {
-            return task;
+            this.taskStore = taskStore;
         }
 
-        public TaskBase Create(string subjects)
+        /// <inheritdoc/>
+        public TaskBase Create(TaskBase task)
         {
-            return new TaskBase();
+            return taskStore.Save(task);
+        }
+
+        /// <inheritdoc/>
+        public TaskBase Create(string subject)
+        {
+            var task = new TaskBase { Subject = subject };
+            return taskStore.Save(task);
+        }
+
+        /// <inheritdoc/>
+        public ICollection<TaskBase> GetAll()
+        {
+            return taskStore.GetAll();
         }
     }
 }

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITUniversity.Task.Web", "ITUniversity.Task.Web\ITUniversity.Task.Web.csproj", "{5E83A59E-3A25-4990-B2A8-8BA5552E259B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITUniversity.Task.Web", "ITUniversity.Task.Web\ITUniversity.Task.Web.csproj", "{5E83A59E-3A25-4990-B2A8-8BA5552E259B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITUniversity.Task.Core", "ITUniversity.Task.Core\ITUniversity.Task.Core.csproj", "{5A2427CE-21B2-4279-B665-F92B958C06BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITUniversity.Task.Core", "ITUniversity.Task.Core\ITUniversity.Task.Core.csproj", "{5A2427CE-21B2-4279-B665-F92B958C06BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
