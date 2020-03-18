@@ -7,5 +7,6 @@ namespace ITUniversity.Task.Core.Managers
         TaskBase Create(TaskBase task);
 
         TaskBase Create(string subjects);
+
     }
 }
