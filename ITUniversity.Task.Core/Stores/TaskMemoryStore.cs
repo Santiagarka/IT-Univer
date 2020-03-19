@@ -31,9 +31,14 @@ namespace ITUniversity.Task.Stores
                 task.Id = saved.Id;
                 return saved.Copy();
             }
-            task.Id = counter++;
-            tasks.Add(task.Copy());
-            return task;
+            else
+            {
+                task.Id = counter++;
+                var newTask = task.Copy();
+                newTask.CreationDate = DateTime.Now;
+                tasks.Add(newTask);
+                return task;
+            }
         }
 
         /// <inheritdoc/>

@@ -2,6 +2,7 @@
 
 using ITUniversity.Task.Managers;
 using ITUniversity.Task.Entities;
+using ITUniversity.Tasks.Managers;
 
 namespace ITUniversity.Task.Web.Controllers
 {
@@ -23,6 +24,13 @@ namespace ITUniversity.Task.Web.Controllers
         public IActionResult Create()
         {
             return View(new TaskBase());
+        }
+
+        [HttpPost]
+        public IActionResult Create(TaskBase task)
+        {
+            taskManager.Create(task);
+            return RedirectToAction("Index", "Task");
         }
     }
 }
