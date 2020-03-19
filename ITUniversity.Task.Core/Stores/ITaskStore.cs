@@ -1,0 +1,41 @@
+﻿using System.Collections.Generic;
+using ITUniversity.Task.Entities;
+
+namespace ITUniversity.Task.Stores
+{
+    /// <summary>
+    /// Хранилище для сущности <see cref="TaskBase"/>
+    /// </summary>
+    public interface ITaskStore
+    {
+        /// <summary>
+        /// Сохранить
+        /// </summary>
+        /// <param name="task">Задача</param>
+        TaskBase Save(TaskBase task);
+
+        /// <summary>
+        /// Обновить
+        /// </summary>
+        /// <param name="task">Задача</param>
+        TaskBase Update(TaskBase task);
+
+        /// <summary>
+        /// Получить
+        /// </summary>
+        /// <param name="id">Идентификатор</param>
+        TaskBase Get(long id);
+
+        /// <summary>
+        /// Получить все
+        /// </summary>
+        ICollection<TaskBase> GetAll();
+
+        /// <summary>
+        /// Удалить
+        /// </summary>
+        /// <param name="id">Идентификатор</param>
+        void Delete(long id);
+    }
+
+}
