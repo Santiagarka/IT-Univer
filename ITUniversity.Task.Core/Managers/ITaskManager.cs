@@ -11,5 +11,8 @@ namespace ITUniversity.Task.Managers
 
         ICollection<TaskBase> GetAll();
 
+        TaskBase Get(long id);
+        void Delete(long id);
+
     }
 }

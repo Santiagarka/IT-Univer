@@ -4,30 +4,36 @@
 
 @{ 
     ViewData["title"] = "Список задач";
+
+    Func<TaskBase, string> calculateCardTitleStyle = task =>
+    {
+        return $"display:flex; {(string.IsNullOrWhiteSpace(task.Description)?" margin-botom:0px": "")}";
+    };
+
+    Func<TaskBase, string> calculateBadgeClass = task =>
+    {
+        return $"badge  badge-{(task.Status == ITUniversity.Task.Enums.TaskStatus.New?"primary":"success")}";
+    };
 }
 <div class="card">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Subject</th>
-                <th scope="col">Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var task in Model)
-            {
-            <tr>
-                <th scope="row">@task.Id</th>
-                <td>
-                    @task.Subject
-                </td>
-                <td>
-                    @task.Description
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
-    <a href="@Url.Action("Create", "Task")" type="button" class="btn btn-primary">Create</a>
+    <div class=" = card-body">
+        <table class="table table-borderless">
+            <tbody>
+                @foreach (var task in Model)
+                {
+                    <tr>
+                        <td style="padding-left":0px>
+                            @await Html.PartialAsync("Task/RowDetails", task)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="@Url.Action("Create", "Task")" type="button" class="btn btn-primary">Create</a>
+    </div>
 </div>
+
+@section scripts
+{
+    <script src="~/view-resource/task/script.js"></script>
+}

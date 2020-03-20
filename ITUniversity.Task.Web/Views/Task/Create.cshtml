@@ -1,25 +1,36 @@
-﻿@using ITUniversity.Task.Entities
+﻿@using ITUniversity.Task.Web.Models
 
-@model TaskBase
+@model TaskCreateModel
 
 @{
     ViewData["title"] = "Создание задачи";
 }
-
-    <div class="row">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Subject" class="control-label"></label>
-                <input asp-for="Subject" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <textarea asp-for="Description" class="form-control"></textarea>
-            </div>
-            <div class="form-group">
-                <button asp-controller="Task" asp-action="Create" class="btn btn-success">Create</button>
-            </div>
-            <button asp-controller="Task" asp-action="Index" class="btn btn-danger">Отмена</button>
-        </form>
+    <div class="card">
+        <div class="card-header">
+            Создание задачи
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Subject" class="control-label"></label>
+                    <input asp-for="Subject" class="form-control" />
+                    <span asp-validation-for="Subject"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <button asp-controller="Task" asp-action="Create" class="btn btn-success">Create</button>
+                    <a asp-controller="Task" asp-action="Index" class="btn btn-danger">Отмена</a>
+                </div>
+            </form>
+        </div>
     </div>
+
+@section scripts
+{
+            <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+            <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+        }
