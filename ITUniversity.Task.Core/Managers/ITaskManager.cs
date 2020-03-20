@@ -14,5 +14,7 @@ namespace ITUniversity.Task.Managers
         TaskBase Get(long id);
         void Delete(long id);
 
+        TaskBase Update(TaskBase task);
+
     }
 }

@@ -43,5 +43,10 @@ namespace ITUniversity.Tasks.Managers
         {
             return taskStore.GetAll();
         }
+
+        public TaskBase Update(TaskBase task)
+        {
+            return taskStore.Update(task);
+        }
     }
 }

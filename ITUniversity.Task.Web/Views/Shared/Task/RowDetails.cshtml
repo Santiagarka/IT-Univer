@@ -19,8 +19,9 @@
     <div class=" = card-body">
         <div style="display:flex">
             <h5 class="card-title" style="@calculateCardTitleStyle(Model)">
-                <a href="@Url.Action("Details", "Task", new { id = Model.Id })"
-                @Model.Subject
+                <a href="@Url.Action("Details", "Task", new { id = Model.Id })">
+                    @Model.Subject
+                </a>
                 <span class="@calculateBadgeClass(Model)" style="margin-left:5px;">
                     @Model.Status
                 </span>
@@ -29,9 +30,11 @@
                 <span class="material-icons" style="float: right; cursor: pointer; color: red;" onclick="task.delete('@Model.Id', this)">
                     delete
                 </span>
-                <span class="material-icons" style="float: right; cursor: pointer; color: cadetblue;" onclick="alert('edit');">
+                <a href="@Url.Action("Edit", "Task", new { id = Model.Id })">
+                <span class="material-icons" style="float: right; cursor: pointer; color: cadetblue;">
                     edit
                 </span>
+                </a>
             </div>
         </div>
         @Model.Description
