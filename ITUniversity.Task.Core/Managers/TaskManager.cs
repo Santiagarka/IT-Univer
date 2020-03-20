@@ -28,10 +28,25 @@ namespace ITUniversity.Tasks.Managers
             return taskStore.Save(task);
         }
 
+        public void Delete(long id)
+        {
+            taskStore.Delete(id);
+        }
+
+        public TaskBase Get(long id)
+        {
+            return taskStore.Get(id);
+        }
+
         /// <inheritdoc/>
         public ICollection<TaskBase> GetAll()
         {
             return taskStore.GetAll();
+        }
+
+        public TaskBase Update(TaskBase task)
+        {
+            return taskStore.Update(task);
         }
     }
 }
