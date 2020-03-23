@@ -8,8 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using Newtonsoft.Json.Serialization;
-
 namespace ITUniversity.Tasks.Web
 {
     public class Startup
@@ -34,7 +32,7 @@ namespace ITUniversity.Tasks.Web
                     // Configure a custom converter
                     //options.SerializerOptions.Converters.Add(new MyCustomJsonConverter());
                 })
-                .AddRazorRuntimeCompilation() //Для изменения cshtml в запущенном приложении                
+                .AddRazorRuntimeCompilation() //Для изменения cshtml в запущенном приложении
                 ;
 
             services
@@ -42,8 +40,8 @@ namespace ITUniversity.Tasks.Web
 
             services
                 .AddTaskCoreServices() //Регистрация сервесов Core
-                .AddTaskApplicationServices() //Регистрация сервисов Application
-                ;
+                .AddTaskApplicationServices() //Регистрация сервисов API
+                .AddTaskNHibernate(Configuration.GetConnectionString("Default"));
 
             services
                 .AddCore();

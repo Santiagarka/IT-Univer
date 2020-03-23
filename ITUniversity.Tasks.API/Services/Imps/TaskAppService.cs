@@ -1,6 +1,6 @@
 ﻿using ITUniversity.Application.Services;
 
-namespace ITUniversity.Tasks.Application.Services.Imps
+namespace ITUniversity.Tasks.API.Services.Imps
 {
     public class TaskAppService : ApplicationService, ITaskAppService
     {
@@ -30,6 +30,11 @@ namespace ITUniversity.Tasks.Application.Services.Imps
         }
 
         public Test GetClass(Test test)
+        {
+            return test;
+        }
+
+        public Test1 GetClass2(Test1 test)
         {
             return test;
         }

@@ -20,7 +20,7 @@ namespace ITUniversity.Tasks.Managers
         public TaskBase Create(TaskBase task)
         {
             task.CreationDate = DateTime.Now;
-            task.Status = Enums.TaskStatus.ToDo;
+            task.Status = Enums.TaskStatus.New;
 
             return taskStore.Save(task);
         }
