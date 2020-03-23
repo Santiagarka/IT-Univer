@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\Dtos\**" />
+    <EmbeddedResource Remove="Services\Dtos\**" />
+    <None Remove="Services\Dtos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ITUniversity.Tasks.Core\ITUniversity.Tasks.Core.csproj" />
+  </ItemGroup>
+
+</Project>

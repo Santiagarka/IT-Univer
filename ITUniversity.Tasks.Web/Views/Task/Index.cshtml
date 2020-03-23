@@ -1,0 +1,32 @@
+﻿@using ITUniversity.Tasks.Entities
+
+@model ICollection<TaskBase>
+
+@{
+    ViewData["Title"] = "Список задач";
+    var createUrl = Url.Action("Create", "Task");
+}
+
+<div class="card">
+    <div class="card-header">
+        Список задач
+        <a style="float: right;" href="@createUrl" type="button" class="btn btn-primary">Добавить задачу</a>
+    </div>
+    <div class="card-body">
+        <table class="table table-borderless">
+            @foreach (var task in Model)
+            {
+                <tr>
+                    <td style="padding-left: 0px; padding-right: 0px;">
+                        @await Html.PartialAsync("Task/RowDetails", task)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/view-resources/task/scripts.js"></script>
+}
