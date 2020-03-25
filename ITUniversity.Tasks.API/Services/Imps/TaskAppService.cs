@@ -1,42 +1,48 @@
-﻿using ITUniversity.Application.Services;
+﻿using AutoMapper;
+using ITUniversity.Application.Services;
+using ITUniversity.Tasks.API.Services.Dto;
+using ITUniversity.Tasks.Entities;
+using ITUniversity.Tasks.Managers;
 
 namespace ITUniversity.Tasks.API.Services.Imps
 {
     public class TaskAppService : ApplicationService, ITaskAppService
     {
-        public void Test()
-        {
+        private readonly ITaskManager taskManager;
 
+        private readonly IMapper mapper;
+
+        public TaskAppService(ITaskManager taskManager, IMapper mapper)
+        {
+            this.taskManager = taskManager;
+            this.mapper = mapper;
+        }
+        public TaskDto Create(TaskCreateDto task)
+        {
+            var entity = mapper.Map<TaskBase>(task);
+            taskManager.Create(entity);
+            var dto = mapper.Map<TaskDto>(entity);
+            return dto;
         }
 
-        public string GetTest()
+        public void Delete(long id)
         {
-            return "aaaaa";
+            taskManager.Delete(id);
         }
 
-        public void TestString(string str)
+        public TaskDto Get(long id)
         {
-
+            TaskBase entity = taskManager.Get(id);
+            TaskDto dto = mapper.Map<TaskDto>(entity);
+            return dto;
         }
 
-        public string GetTestString(string str)
+        public TaskDto Update(TaskUpdateDto task)
         {
-            return "aaaaa";
-        }
-
-        public void Class(Test test)
-        {
-
-        }
-
-        public Test GetClass(Test test)
-        {
-            return test;
-        }
-
-        public Test1 GetClass2(Test1 test)
-        {
-            return test;
+            var entity = mapper.Map<TaskBase>(task);
+            taskManager.Update(entity);
+            var dto = mapper.Map<TaskDto>(entity);
+            return dto;
         }
     }
 }

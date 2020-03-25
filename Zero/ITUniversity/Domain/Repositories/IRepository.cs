@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace ITUniversity.Domain.Repositories
 {
     /// <summary>
     /// Репозитория сущности
     /// </summary>
     /// <typeparam name="TEntity">Тип сущности</typeparam>
-    public interface IRepository<TEntity> where TEntity: class
-    {
+    public interface IRepository/*<TEntity> where TEntity: class*/
+    {/*
 
         /// <summary>
         /// Сохранить
@@ -50,6 +46,8 @@ namespace ITUniversity.Domain.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        TEntity Get(long id);
+        TEntity Get(long id);*/
     }
+
+
 }

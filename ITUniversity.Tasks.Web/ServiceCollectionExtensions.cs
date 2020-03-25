@@ -28,7 +28,7 @@ namespace ITUniversity.Tasks.Web
 
         public static IServiceCollection AddTaskApplicationServices(this IServiceCollection services)
         {
-            services.CreateControllersForAppServices(typeof(TaskAPIModule).Assembly);
+            services.CreateControllersForAppServices(typeof(TaskApplicationModule).Assembly);
             services.AddTransient<ITaskAppService, TaskAppService>();
 
             return services;

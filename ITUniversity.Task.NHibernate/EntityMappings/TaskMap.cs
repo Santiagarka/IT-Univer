@@ -32,7 +32,13 @@ namespace ITUniversity.Tasks.NHibernate.EntityMappings
                 x.Type(NHibernateUtil.DateTime);
             });
 
-            Table("Tasks");
+            Property(b => b.Status, x =>
+            {
+                x.Type(NHibernateUtil.Int32);
+                x.NotNullable(true);
+            });
+
+            Table(TaskBase.TableName);
         }
     }
 }

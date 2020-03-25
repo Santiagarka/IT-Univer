@@ -1,7 +1,7 @@
 using AutoMapper;
 
 using ITUniversity.AspNetCore;
-
+using ITUniversity.Tasks.API;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -36,7 +36,7 @@ namespace ITUniversity.Tasks.Web
                 ;
 
             services
-                .AddAutoMapper(typeof(Startup).Assembly);
+                .AddAutoMapper(typeof(Startup).Assembly, typeof(TaskApplicationModule).Assembly);
 
             services
                 .AddTaskCoreServices() //Регистрация сервесов Core
