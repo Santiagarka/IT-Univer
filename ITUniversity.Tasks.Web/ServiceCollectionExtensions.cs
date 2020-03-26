@@ -30,6 +30,7 @@ namespace ITUniversity.Tasks.Web
         {
             services.CreateControllersForAppServices(typeof(TaskApplicationModule).Assembly);
             services.AddTransient<ITaskAppService, TaskAppService>();
+            services.AddTransient<IUserAppService, UserAppService>();
 
             return services;
         }
@@ -60,7 +61,7 @@ namespace ITUniversity.Tasks.Web
             //services.AddScoped<IMapperSession, NHibernateMapperSession>();
 
             services.AddScoped<ITaskRepository, TaskRepository>();
-            //services.AddTransient<ITaskRepository, TaskRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }

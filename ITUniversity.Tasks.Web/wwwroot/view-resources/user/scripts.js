@@ -1,8 +1,8 @@
-﻿var task = task || {};
+﻿var user = user || {};
 
-task.delete = function (id, invoker) {
+user.block = function (id, invoker) {
     $.ajax({
-        url: "/Task/Delete",
+        url: "/api/services/user/block",
         dataType: "json",
         method: "POST",
         data: { id: id },
