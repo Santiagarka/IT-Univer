@@ -1,6 +1,6 @@
-﻿@using ITUniversity.Tasks.Entities
+﻿@using ITUniversity.Tasks.API.Services.Dto
 
-@model ICollection<TaskBase>
+@model ICollection<TaskDto>
 
 @{
     ViewData["Title"] = "Список задач";
@@ -28,5 +28,5 @@
 
 @section scripts
 {
-    <script src="~/view-resources/user/scripts.js"></script>
+    <script src="~/view-resources/task/scripts.js"></script>
 }

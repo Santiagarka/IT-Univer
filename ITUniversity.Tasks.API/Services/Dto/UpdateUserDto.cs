@@ -3,21 +3,12 @@
     /// <summary>
     /// 
     /// </summary>
-    public class UserDto
+    public class UpdateUserDto
     {
         /// <summary>
         /// Идентификатор
         /// </summary>
         public int Id
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Логин
-        /// </summary>
-        public string Login
         {
             get;
             set;
@@ -35,7 +26,7 @@
         /// <summary>
         /// Роль
         /// </summary>
-        public RoleDto Role
+        public int? RoleId
         {
             get;
             set;

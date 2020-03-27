@@ -3,34 +3,35 @@ using ITUniversity.Tasks.API;
 using ITUniversity.Tasks.API.Services;
 using ITUniversity.Tasks.API.Services.Imps;
 using ITUniversity.Tasks.Managers;
-using ITUniversity.Tasks.Stores;
+using ITUniversity.Tasks.Managers.Impls;
 using ITUniversity.Tasks.NHibernate;
+using ITUniversity.Tasks.NHibernate.Repositories;
+using ITUniversity.Tasks.Repositories;
 
 using Microsoft.Extensions.DependencyInjection;
+
 using NHibernate.Cfg;
-using NHibernate.Mapping.ByCode;
 using NHibernate.Dialect;
-using ITUniversity.Tasks.Repositories;
-using ITUniversity.Tasks.NHibernate.Repositories;
+using NHibernate.Mapping.ByCode;
 
 namespace ITUniversity.Tasks.Web
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddTaskCoreServices(this IServiceCollection services)
+        public static IServiceCollection AddTaskCore(this IServiceCollection services)
         {
-            //services.AddSingleton<ITaskStore, TaskMemoryStore>();
-            services.AddScoped<ITaskStore, TaskDbStore>();
             services.AddTransient<ITaskManager, TaskManager>();
+            services.AddTransient<IUserManager, UserManager>();
 
             return services;
         }
 
-        public static IServiceCollection AddTaskApplicationServices(this IServiceCollection services)
+        public static IServiceCollection AddTaskApplication(this IServiceCollection services)
         {
             services.CreateControllersForAppServices(typeof(TaskApplicationModule).Assembly);
             services.AddTransient<ITaskAppService, TaskAppService>();
             services.AddTransient<IUserAppService, UserAppService>();
+            services.AddTransient<IRoleAppService, RoleAppService>();
 
             return services;
         }
@@ -57,11 +58,9 @@ namespace ITUniversity.Tasks.Web
 
             services.AddSingleton(sessionFactory);
             services.AddScoped(factory => sessionFactory.OpenSession());
-
-            //services.AddScoped<IMapperSession, NHibernateMapperSession>();
-
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             return services;
         }

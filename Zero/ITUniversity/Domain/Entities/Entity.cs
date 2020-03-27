@@ -1,5 +1,4 @@
-﻿
-namespace ITUniversity.Domain.Entities
+﻿namespace ITUniversity.Domain.Entities
 {
     /// <summary>
     /// Сущность, с первичным ключем с типа <see cref="int"/>

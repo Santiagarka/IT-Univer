@@ -2,6 +2,7 @@ using AutoMapper;
 
 using ITUniversity.AspNetCore;
 using ITUniversity.Tasks.API;
+
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,12 +25,12 @@ namespace ITUniversity.Tasks.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
                     options.LoginPath = new PathString("/Account/Login");
+                    options.AccessDeniedPath = new PathString("/Account/AccessDenied");
                 })
                 ;
 
@@ -50,9 +51,10 @@ namespace ITUniversity.Tasks.Web
                 .AddAutoMapper(typeof(Startup).Assembly, typeof(TaskApplicationModule).Assembly);
 
             services
-                .AddTaskCoreServices() //Регистрация сервесов Core
-                .AddTaskApplicationServices() //Регистрация сервисов API
-                .AddTaskNHibernate(Configuration.GetConnectionString("Default"));
+                .AddTaskCore() //Регистрация сервесов Core
+                .AddTaskApplication() //Регистрация сервисов API
+                .AddTaskNHibernate(Configuration.GetConnectionString("Default"))
+                ;
 
             services
                 .AddCore();
@@ -76,8 +78,8 @@ namespace ITUniversity.Tasks.Web
 
             app.UseRouting();
 
-            app.UseAuthentication();    
-            app.UseAuthorization();     
+            app.UseAuthentication();    // аутентификация
+            app.UseAuthorization();     // авторизация
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,8 +1,7 @@
-﻿using ITUniversity.Tasks.Entities;
+﻿using System.Collections.Generic;
+
+using ITUniversity.Tasks.Entities;
 using ITUniversity.Tasks.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ITUniversity.Tasks.Stores
 {

@@ -1,6 +1,8 @@
-﻿using ITUniversity.Application.Services;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using ITUniversity.Application.Services;
 using ITUniversity.Tasks.API.Services.Dto;
-using System.Collections.Generic;
 
 namespace ITUniversity.Tasks.API.Services
 {
@@ -16,20 +18,38 @@ namespace ITUniversity.Tasks.API.Services
         UserDto Create(CreateUserDto dto);
 
         /// <summary>
+        /// Обновить пользователя
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        UserDto Update(UpdateUserDto dto);
+
+        /// <summary>
+        /// Получить пользователя
+        /// </summary>
+        /// <param name="id">Идентификатор пользователя</param>
+        UserDto Get(int id);
+
+        /// <summary>
         /// Получить пользователя
         /// </summary>
         /// <param name="login">Логин</param>
-        UserDto Get(string login, bool isBlocked = true);
+        UserDto Get(string login);
 
         /// <summary>
         /// Получить пользователя
         /// </summary>
         /// <param name="login">Логин</param>
         /// <param name="password">Пароль</param>
-        UserDto Get(string login, string password, bool isBlocked = true);
+        UserDto Get(string login, string password);
 
+        /// <summary>
+        /// Получить список пользователей
+        /// </summary>
+        /// <remarks>
+        /// Только не блокированные пользователи
+        /// </remarks>
         ICollection<UserDto> GetAll();
-
 
         /// <summary>
         /// Проверить пароль
@@ -41,7 +61,13 @@ namespace ITUniversity.Tasks.API.Services
         /// <summary>
         /// Заблокировать пользователя
         /// </summary>
-        /// <param name="id">Идентификатор</param>
-        void Block(int id);
+        /// <param name="id">Иденитификатор пользователя</param>
+        Task<bool> Block(int id);
+
+        /// <summary>
+        /// Свободный логин
+        /// </summary>
+        /// <param name="login">Логин</param>
+        Task<bool> FreeLogin(string login);
     }
 }

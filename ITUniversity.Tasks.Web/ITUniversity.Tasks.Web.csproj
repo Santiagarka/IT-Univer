@@ -11,12 +11,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.0" />
-    <PackageReference Include="NHibernate" Version="5.2.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ITUniversity.Task.NHibernate\ITUniversity.Tasks.NHibernate.csproj" />
     <ProjectReference Include="..\ITUniversity.Tasks.API\ITUniversity.Tasks.API.csproj" />
+    <ProjectReference Include="..\ITUniversity.Tasks.NHibernate\ITUniversity.Tasks.NHibernate.csproj" />
     <ProjectReference Include="..\Zero\ITUniversity.AspNetCore\ITUniversity.AspNetCore.csproj" />
   </ItemGroup>
 

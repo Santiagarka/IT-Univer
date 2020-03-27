@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ITUniversity.Domain.Entities
+﻿namespace ITUniversity.Domain.Entities
 {
     /// <summary>
     /// Сущность
@@ -11,6 +7,10 @@ namespace ITUniversity.Domain.Entities
     public abstract class Entity<TPrimaryKey> : IEntity<TPrimaryKey>
     {
         /// <inheritdoc/>
-        public virtual TPrimaryKey Id { get; set; }
+        public virtual TPrimaryKey Id
+        {
+            get;
+            set;
+        }
     }
 }

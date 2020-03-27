@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+
 using ITUniversity.Tasks.API.Services.Dto;
 using ITUniversity.Tasks.Entities;
 using ITUniversity.Tasks.Web.Models;
@@ -14,6 +15,7 @@ namespace ITUniversity.Tasks.Web
             CreateMap<TaskBase, TaskEditModel>();
             CreateMap<TaskEditModel, TaskBase>();
             CreateMap<RegisterModel, CreateUserDto>();
+            CreateMap<UserDto, UserEditModel>();
         }
     }
 }

@@ -39,6 +39,22 @@ namespace ITUniversity.Tasks.Entities
             set;
         }
 
-        public virtual bool IsBlocked { get; set; }
+        /// <summary>
+        /// Заблокирован
+        /// </summary>
+        public virtual bool IsBlocked
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Роль
+        /// </summary>
+        public virtual Role Role
+        {
+            get;
+            set;
+        }
     }
 }

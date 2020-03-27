@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 using ITUniversity.Tasks.Entities;
 using ITUniversity.Tasks.Repositories;
-//using ITUniversity.Tasks.Stores;
 
-namespace ITUniversity.Tasks.Managers
+namespace ITUniversity.Tasks.Managers.Impls
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Менеджер сущности <see cref="TaskBase"/>
+    /// </summary>
     public class TaskManager : ITaskManager
     {
-        //private readonly ITaskStore taskStore;
         private readonly ITaskRepository taskRepository;
 
         public TaskManager(ITaskRepository taskRepository)
@@ -22,7 +22,7 @@ namespace ITUniversity.Tasks.Managers
         public TaskBase Create(TaskBase task)
         {
             task.CreationDate = DateTime.Now;
-            task.Status = Enums.TaskStatus.New;
+            task.Status = Enums.TaskStatus.ToDo;
 
             return taskRepository.Save(task);
         }

@@ -7,37 +7,31 @@ namespace ITUniversity.Tasks.Entities
     /// <summary>
     /// Базовый класс задач
     /// </summary>
-     public class TaskBase:Entity<long>
+    public class TaskBase : Entity<long>
     {
-
         /// <summary>
         /// Имя таблицы
         /// </summary>
         public const string TableName = "Tasks";
 
         /// <summary>
-        /// Идентификатор
-        /// </summary>
-        virtual public long Id { get; set; }
-
-        /// <summary>
         /// Тема
         /// </summary>
-        virtual public string Subject { get; set; }
+        public virtual string Subject { get; set; }
 
         /// <summary>
         /// Описание
         /// </summary>
-        virtual public string Description { get; set; }
+        public virtual string Description { get; set; }
 
         /// <summary>
         /// Дата создания
         /// </summary>
-        virtual public DateTime CreationDate { get; set; }
+        public virtual DateTime CreationDate { get; set; }
 
         /// <summary>
         /// Статус
         /// </summary>
-        virtual public TaskStatus Status { get; set; }
+        public virtual TaskStatus Status { get; set; }
     }
 }

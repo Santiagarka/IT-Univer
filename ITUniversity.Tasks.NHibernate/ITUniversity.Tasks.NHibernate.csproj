@@ -5,9 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NHibernate" Version="5.2.7"></PackageReference>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.1"></PackageReference>
+    <PackageReference Include="NHibernate" Version="5.2.7" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\ITUniversity.Tasks.Core\ITUniversity.Tasks.Core.csproj" />
   </ItemGroup>

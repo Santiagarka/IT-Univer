@@ -10,18 +10,11 @@ namespace ITUniversity.Tasks.Enums
         /// <summary>
         /// Новая
         /// </summary>
-        New = 0,
+        ToDo = 0,
 
         /// <summary>
         /// Выполненая
         /// </summary>
-        Done = 1,
-
-        /// <summary>
-        /// В работе
-        /// </summary>
-        ToDo = 2
-
-
+        Done = 1
     }
 }

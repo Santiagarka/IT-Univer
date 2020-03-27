@@ -35,7 +35,7 @@ namespace ITUniversity.Tasks.Web.Models
         }
 
         /// <summary>
-        /// дата создания
+        /// Дата создания
         /// </summary>
         public DateTime CreationDate
         {

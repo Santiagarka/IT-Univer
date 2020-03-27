@@ -63,7 +63,8 @@ namespace ITUniversity.Tasks.Web.Controllers
                 return View(model);
             }
 
-            await Authenticate(model.Login);
+            await Authenticate(user);
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -88,13 +89,13 @@ namespace ITUniversity.Tasks.Web.Controllers
             {
                 return View(model);
             }
-            var user = userAppService.Get(model.Login);
-            if (user == null)
+            var isFree = await userAppService.FreeLogin(model.Login);
+            if (isFree)
             {
-                var dto = mapper.Map<CreateUserDto>(model);
-                userAppService.Create(dto);
+                var createUserDto = mapper.Map<CreateUserDto>(model);
+                var userDto = userAppService.Create(createUserDto);
 
-                await Authenticate(model.Login);
+                await Authenticate(userDto);
 
                 return RedirectToAction("Index", "Home");
             }
@@ -116,11 +117,21 @@ namespace ITUniversity.Tasks.Web.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        private async Task Authenticate(string login)
+        /// <summary>
+        /// Получить страницу с отказом в доступе
+        /// </summary>
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        private async Task Authenticate(UserDto user)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, login)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role != null ? user.Role.Name : string.Empty)
             };
 
             var id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

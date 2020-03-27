@@ -1,10 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using ITUniversity.Tasks.API.Services.Dto;
 using ITUniversity.Tasks.Entities;
+using ITUniversity.Tasks.Managers;
 using ITUniversity.Tasks.Repositories;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ITUniversity.Tasks.API.Services.Imps
 {
@@ -15,24 +17,29 @@ namespace ITUniversity.Tasks.API.Services.Imps
     {
         private readonly IUserRepository userRepository;
 
+        private readonly IRoleRepository roleRepository;
+
+        private readonly IUserManager userManager;
+
         private readonly IMapper mapper;
 
         /// <summary>
         /// Инициализировать экземпляр <see cref="UserAppService"/>
         /// </summary>
         /// <param name="userRepository">Репозиторий пользователей</param>
+        /// <param name="roleRepository"></param>
+        /// <param name="userManager"></param>
         /// <param name="mapper">Маппер</param>
-        public UserAppService(IUserRepository userRepository, IMapper mapper)
+        public UserAppService(
+            IUserRepository userRepository,
+            IRoleRepository roleRepository,
+            IUserManager userManager,
+            IMapper mapper)
         {
             this.userRepository = userRepository;
+            this.roleRepository = roleRepository;
+            this.userManager = userManager;
             this.mapper = mapper;
-        }
-
-        public void Block(int id)
-        {
-            var entity = userRepository.Get(id);
-            entity.IsBlocked = true;
-            userRepository.Update(entity);
         }
 
         /// <inheritdoc/>
@@ -44,23 +51,43 @@ namespace ITUniversity.Tasks.API.Services.Imps
         }
 
         /// <inheritdoc/>
-        public UserDto Get(string login, bool isBlocked = true)
+        public UserDto Update(UpdateUserDto dto)
         {
-            var entity = isBlocked ? userRepository.FirstOrDefault(e => e.Login == login) : userRepository.FirstOrDefault(e => e.Login == login && e.IsBlocked == false);
+            var user = userRepository.Get(dto.Id);
+            user.Email = dto.Email;
+            if (dto.RoleId.HasValue)
+            {
+                var role = roleRepository.Get(dto.RoleId.Value);
+                user.Role = role;
+            }
+            return mapper.Map<UserDto>(user);
+        }
+
+        /// <inheritdoc/>
+        public UserDto Get(int id)
+        {
+            var entity = userRepository.Get(id);
             return mapper.Map<UserDto>(entity);
         }
 
         /// <inheritdoc/>
-        public UserDto Get(string login, string password, bool isBlocked = true)
+        public UserDto Get(string login)
         {
-            var entity = isBlocked ? userRepository.FirstOrDefault(e => e.Login == login && e.Password == password): 
-                userRepository.FirstOrDefault(e => e.Login == login && e.Password == password && e.IsBlocked == false);
+            var entity = userRepository.FirstOrDefault(e => e.Login == login);
             return mapper.Map<UserDto>(entity);
         }
 
+        /// <inheritdoc/>
+        public UserDto Get(string login, string password)
+        {
+            var entity = userRepository.FirstOrDefault(e => e.Login == login && e.Password == password);
+            return mapper.Map<UserDto>(entity);
+        }
+
+        /// <inheritdoc/>
         public ICollection<UserDto> GetAll()
         {
-            var entities = userRepository.GetAll().Where(e=>!e.IsBlocked).ToList();
+            var entities = userRepository.GetAllList();
             return mapper.Map<ICollection<UserDto>>(entities);
         }
 
@@ -69,6 +96,18 @@ namespace ITUniversity.Tasks.API.Services.Imps
         {
             var entity = userRepository.Get(dto.Id);
             return entity.Password == password;
+        }
+
+        /// <inheritdoc/>
+        public async Task<bool> Block(int id)
+        {
+            return await userManager.Block(id);
+        }
+
+        /// <inheritdoc/>
+        public async Task<bool> FreeLogin(string login)
+        {
+            return await userManager.FreeLogin(login);
         }
     }
 }

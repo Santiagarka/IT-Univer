@@ -1,14 +1,12 @@
-﻿using System;
-
-using ITUniversity.Tasks.Entities;
+﻿using ITUniversity.Tasks.Entities;
 using ITUniversity.Tasks.Enums;
 
 namespace ITUniversity.Tasks.API.Services.Dto
 {
     /// <summary>
-    /// ДТО для <see cref="TaskBase"/>
+    /// ДТО обновления <see cref="TaskBase"/>
     /// </summary>
-    public class TaskDto
+    public class UpdateTaskDto
     {
         /// <summary>
         /// Индентификатор
@@ -20,27 +18,9 @@ namespace ITUniversity.Tasks.API.Services.Dto
         }
 
         /// <summary>
-        /// Тема
-        /// </summary>
-        public string Subject
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Описание
         /// </summary>
         public string Description
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Дата создания
-        /// </summary>
-        public DateTime CreationDate
         {
             get;
             set;
